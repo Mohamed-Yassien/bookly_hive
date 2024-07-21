@@ -1,3 +1,4 @@
+import 'package:bookly_hive/utils/constants.dart';
 import 'package:bookly_hive/views/notes_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(1000),
             side: BorderSide.none,
           ),
+          backgroundColor: kPrimaryColor,
+          foregroundColor: Colors.black,
         ),
       ),
       home: const NotesView(),
