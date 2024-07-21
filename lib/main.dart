@@ -14,6 +14,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(1000),
+            side: BorderSide.none,
+          ),
+        ),
       ),
       home: const NotesView(),
     );
