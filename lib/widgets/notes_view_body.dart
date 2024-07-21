@@ -1,4 +1,5 @@
 import 'package:bookly_hive/widgets/custom_app_bar.dart';
+import 'package:bookly_hive/widgets/notes_item.dart';
 import 'package:flutter/material.dart';
 
 class NotesViewBody extends StatelessWidget {
@@ -14,6 +15,10 @@ class NotesViewBody extends StatelessWidget {
             height: 50,
           ),
           CustomAppBar(),
+          SizedBox(
+            height: 20,
+          ),
+          NotesItem(),
         ],
       ),
     );
