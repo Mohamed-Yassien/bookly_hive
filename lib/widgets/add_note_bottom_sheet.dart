@@ -1,7 +1,10 @@
-import 'package:bookly_hive/widgets/custom_button.dart';
-import 'package:flutter/material.dart';
 
-import 'custom_text_field.dart';
+import 'package:bookly_hive/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:bookly_hive/cubits/add_note_cubit/add_note_states.dart';
+import 'package:bookly_hive/widgets/add_note_form.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
   const AddNoteBottomSheet({
@@ -10,72 +13,25 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-      child: SingleChildScrollView(
-        child: AddNoteForm(),
-      ),
-    );
-  }
-}
-
-class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({
-    super.key,
-  });
-
-  @override
-  State<AddNoteForm> createState() => _AddNoteFormState();
-}
-
-class _AddNoteFormState extends State<AddNoteForm> {
-  final formKey = GlobalKey<FormState>();
-
-  String title = '';
-  String content = '';
-
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autovalidateMode,
-      child: Column(
-        children: [
-          CustomTextField(
-            hintText: 'title',
-            onSaved: (val) {
-              title = val!;
-            },
+    return BlocConsumer<AddNoteCubit, AddNoteStates>(
+      listener: (context, state) {
+        if (state is AddNoteSuccessState) {
+          Navigator.pop(context);
+        } else if (state is AddNoteErrorState) {
+          debugPrint(state.error);
+        }
+      },
+      builder: (context, state) {
+        return ModalProgressHUD(
+          inAsyncCall: state is AddNoteLoadingState,
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
+            child: SingleChildScrollView(
+              child: AddNoteForm(),
+            ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            hintText: 'content',
-            maxLines: 5,
-            onSaved: (val) {
-              content = val!;
-            },
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          CustomButton(
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
