@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  Future.wait([
-    Hive.initFlutter(),
-    Hive.openBox(kNotesBox),
-  ]);
+  await Hive.initFlutter();
+  await Hive.openBox(kNotesBox);
   runApp(const MyApp());
 }
 
