@@ -1,8 +1,13 @@
 import 'package:bookly_hive/utils/constants.dart';
 import 'package:bookly_hive/views/notes_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  Future.wait([
+    Hive.initFlutter(),
+    Hive.openBox(kNotesBox),
+  ]);
   runApp(const MyApp());
 }
 
