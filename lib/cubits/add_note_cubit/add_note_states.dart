@@ -10,3 +10,5 @@ class AddNoteErrorState extends AddNoteStates {
   final String error;
   AddNoteErrorState(this.error);
 }
+
+class ChangeSelectedIndexState extends AddNoteStates{}

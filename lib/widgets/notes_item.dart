@@ -1,9 +1,14 @@
+import 'package:bookly_hive/cubits/notes_cubit/notes_cubit.dart';
+import 'package:bookly_hive/models/note_model.dart';
 import 'package:bookly_hive/views/edit_note_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesItem extends StatelessWidget {
-  const NotesItem({super.key});
+  const NotesItem({super.key, required this.noteModel});
+
+  final NoteModel noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +29,17 @@ class NotesItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color(
-            0xffFFcc80,
+          color: Color(
+            noteModel.color,
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
-              title: const Text(
-                "Flutter App",
-                style: TextStyle(
+              title: Text(
+                noteModel.title,
+                style: const TextStyle(
                   fontSize: 22,
                   color: Colors.black,
                 ),
@@ -42,7 +47,7 @@ class NotesItem extends StatelessWidget {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  'Learn Flutter With Moahmed Ali',
+                  noteModel.subTitle,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black.withOpacity(.5),
@@ -50,7 +55,10 @@ class NotesItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  noteModel.delete();
+                  BlocProvider.of<NotesCubit>(context).getAllNotes();
+                },
                 icon: const Icon(
                   FontAwesomeIcons.trash,
                   size: 22,
@@ -61,7 +69,7 @@ class NotesItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Text(
-                "May 20 , 2024",
+                noteModel.date,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.black.withOpacity(.5),

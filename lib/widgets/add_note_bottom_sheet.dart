@@ -1,5 +1,6 @@
 import 'package:bookly_hive/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:bookly_hive/cubits/add_note_cubit/add_note_states.dart';
+import 'package:bookly_hive/cubits/notes_cubit/notes_cubit.dart';
 import 'package:bookly_hive/widgets/add_note_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +18,7 @@ class AddNoteBottomSheet extends StatelessWidget {
       child: BlocConsumer<AddNoteCubit, AddNoteStates>(
         listener: (context, state) {
           if (state is AddNoteSuccessState) {
+            BlocProvider.of<NotesCubit>(context).getAllNotes();
             Navigator.pop(context);
           } else if (state is AddNoteErrorState) {
             debugPrint(state.error);
