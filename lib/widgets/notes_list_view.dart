@@ -25,7 +25,7 @@ class NotesListView extends StatelessWidget {
             },
             separatorBuilder: (context, index) {
               return const SizedBox(
-                height: 16,
+                height: 10,
               );
             },
             itemCount: cubit.notes.length,
