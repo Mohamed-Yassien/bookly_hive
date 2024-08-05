@@ -4,3 +4,4 @@ const Color kPrimaryColor = Color(0xff62FCD7);
 const String kNotesBox = 'notes_box';
 
 const String appColorKey = 'appColor';
+const String appThemeKey = 'appTheme';
