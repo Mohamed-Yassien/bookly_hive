@@ -30,17 +30,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => NotesCubit()..getAllNotes(),
+      providers: [
+        BlocProvider(
+          create: (context) => NotesCubit()..getAllNotes(),
+        ),
+        BlocProvider(
+          create: (context) => ChangeAppColorCubit(
+            ColorSeed.green,
           ),
-          BlocProvider(
-            create: (context) => ChangeAppColorCubit(
-              ColorSeed.green,
-            ),
-          ),
-        ],
-        child: LayoutBuilder(builder: (context, constaints) {
+        ),
+      ],
+      child: LayoutBuilder(
+        builder: (context, constaints) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -57,6 +58,8 @@ class MyApp extends StatelessWidget {
             ),
             home: const NotesView(),
           );
-        }));
+        },
+      ),
+    );
   }
 }
