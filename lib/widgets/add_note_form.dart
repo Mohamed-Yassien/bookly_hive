@@ -2,7 +2,6 @@ import 'package:bookly_hive/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:bookly_hive/cubits/add_note_cubit/add_note_states.dart';
 import 'package:bookly_hive/models/note_model.dart';
 import 'package:bookly_hive/utils/app_theme.dart';
-import 'package:bookly_hive/utils/constants.dart';
 import 'package:bookly_hive/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
