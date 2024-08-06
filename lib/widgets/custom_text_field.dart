@@ -1,3 +1,4 @@
+import 'package:bookly_hive/utils/app_theme.dart';
 import 'package:bookly_hive/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,9 @@ class CustomTextField extends StatelessWidget {
       onSaved: onSaved,
       maxLines: maxLines,
       decoration: InputDecoration(
-        border: buildBorder(),
-        enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(color: kPrimaryColor),
+        border: buildBorder(context),
+        enabledBorder: buildBorder(context),
+        focusedBorder: buildBorder(context, color: kPrimaryColor),
         hintText: hintText,
       ),
       validator: (val) {
@@ -38,11 +39,12 @@ class CustomTextField extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder buildBorder({Color? color}) {
+  OutlineInputBorder buildBorder(context, {Color? color}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(
-        color: color ?? Colors.white,
+        color: color ??
+            (!AppTheme.isDarkTheme(context) ? Colors.black : Colors.white),
       ),
     );
   }

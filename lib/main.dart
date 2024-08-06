@@ -45,11 +45,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: LayoutBuilder(
-        builder: (context, constaints) {
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            themeMode: context.watch<ThemeCubit>().state,
+            themeMode: state,
             theme: AppTheme.lightTheme(
                 context.watch<ChangeAppColorCubit>().state.color),
             darkTheme: AppTheme.darkTheme(

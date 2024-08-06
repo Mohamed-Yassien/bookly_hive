@@ -1,6 +1,8 @@
 import 'package:bookly_hive/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:bookly_hive/cubits/add_note_cubit/add_note_states.dart';
 import 'package:bookly_hive/models/note_model.dart';
+import 'package:bookly_hive/utils/app_theme.dart';
+import 'package:bookly_hive/utils/constants.dart';
 import 'package:bookly_hive/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,8 +62,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   itemBuilder: (context, index) {
                     return cubit.selectedIndex == index
                         ? CircleAvatar(
-                            radius: 34,
-                            backgroundColor: Colors.white,
+                            radius: 33,
+                            backgroundColor: !AppTheme.isDarkTheme(context)
+                                ? Colors.black.withOpacity(.5)
+                                : Colors.white,
                             child: CircleAvatar(
                               radius: 30,
                               backgroundColor: cubit.colors[index],
